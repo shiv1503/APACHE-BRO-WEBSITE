@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f1113">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230f1113'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23ff6a1a'/%3E%3C/svg%3E">
+<title>Apache Bro — Bike Service Centre | Multi-Brand Motorcycle Specialists</title>
+<meta name="description" content="Apache Bro Bike Service Centre — multi-brand motorcycle servicing for Royal Enfield, KTM, Bajaj, Yamaha, Kawasaki, Suzuki and Honda. Commuters to performance machines, diagnosed and serviced properly.">
+<meta property="og:title" content="Apache Bro — Bike Service Centre">
+<meta property="og:description" content="Built for the ride. Serviced by experts. Multi-brand motorcycle service and repair.">
+<meta property="og:type" content="business.business">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "Apache Bro Bike Service Centre",
+  "description": "Multi-brand motorcycle service centre servicing commuter, touring and performance motorcycles.",
+  "priceRange": "$$"
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0f1113;
+    --panel:#181b1f;
+    --panel-2:#1f2328;
+    --steel:#33393f;
+    --steel-soft:#2a2f34;
+    --chrome:#aab0b8;
+    --chrome-dim:#767c82;
+    --white:#f3f1ea;
+    --ember:#ff6a1a;
+    --ember-dim:#c6500f;
+    --ember-glow:rgba(255,106,26,.35);
+    --teal:#4fb8a6;
+    --font-display:'Big Shoulders Display', sans-serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.002ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+  }
+  body{
+    background:var(--void);
+    color:var(--white);
+    font-family:var(--font-body);
+    line-height:1.5;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* Anchor targets land clear of the fixed nav */
+  /* Section jump targets already carry generous top padding from .section-pad,
+     so they only need a small cushion — not a second full nav-height gap.
+     #bookingForm/#map sit deeper inside their section without that built-in
+     padding, so they still need the full nav clearance. */
+  section[id]{ scroll-margin-top:10px; }
+  #bookingForm, #map{ scroll-margin-top:88px; }
+  @media (max-width:760px){
+    section[id]{ scroll-margin-top:6px; }
+    #bookingForm, #map{ scroll-margin-top:74px; }
+  }
+  ::selection{ background:var(--ember); color:var(--void); }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  button{font-family:inherit; cursor:pointer;}
+  :focus-visible{ outline:2px solid var(--ember); outline-offset:3px; }
+
+  .wrap{ max-width:1280px; margin:0 auto; padding:0 clamp(20px,5vw,64px); }
+  .eyebrow{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--ember); display:flex; align-items:center; gap:10px; margin-bottom:18px;
+  }
+  .eyebrow::before{ content:""; width:22px; height:1px; background:var(--ember); display:inline-block; }
+  h1,h2,h3,h4{ font-family:var(--font-display); font-weight:800; text-transform:uppercase; letter-spacing:.01em; line-height:.98; }
+  .section-head{ max-width:760px; }
+  .section-head h2{ font-size:clamp(34px,5.6vw,64px); }
+  .section-pad{ padding:clamp(72px,11vw,132px) 0; }
+  .lede{ color:var(--chrome); font-size:17px; max-width:52ch; }
+
+  /* buttons */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:10px;
+    padding:15px 28px; font-weight:700; font-size:14px; letter-spacing:.05em; text-transform:uppercase;
+    border-radius:2px; border:1px solid transparent; transition:transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{ background:var(--ember); color:#181005; }
+  .btn-primary:hover{ transform:translateY(-2px); background:#ff7d34; }
+  .btn-outline{ border-color:var(--steel); color:var(--white); }
+  .btn-outline:hover{ border-color:var(--chrome); background:var(--panel-2); transform:translateY(-2px); }
+  .btn-ghost{ color:var(--chrome); border-color:transparent; padding:15px 12px; }
+  .btn-ghost:hover{ color:var(--white); }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:fixed; top:0; left:0; right:0; z-index:200;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px clamp(20px,5vw,64px);
+    background:linear-gradient(to bottom, rgba(15,17,19,.85), transparent);
+    transition:background .3s ease, padding .3s ease, border-color .3s ease;
+    border-bottom:1px solid transparent;
+  }
+  .nav.solid{ background:rgba(15,17,19,.92); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); border-color:var(--steel-soft); padding-top:12px; padding-bottom:12px; }
+  .brandmark{ display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:800; font-size:20px; text-transform:uppercase; letter-spacing:.03em; min-width:0; }
+  .brandmark .dot{ width:15px; height:15px; background:var(--ember); border-radius:50%; box-shadow:0 0 12px var(--ember-glow); flex:0 0 auto; }
+  .brandmark small{ display:block; font-family:var(--font-mono); font-weight:400; font-size:9px; color:var(--chrome-dim); letter-spacing:.18em; text-transform:uppercase; }
+  .nav-links{ display:flex; gap:34px; font-size:13px; letter-spacing:.04em; text-transform:uppercase; font-weight:600; color:var(--chrome); }
+  .nav-links a{ position:relative; padding-bottom:4px; transition:color .2s; }
+  .nav-links a:hover{ color:var(--white); }
+  .nav-links a::after{ content:""; position:absolute; left:0; bottom:0; height:1px; width:0; background:var(--ember); transition:width .25s ease; }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-cta{ display:flex; align-items:center; gap:18px; }
+
+  /* ---- Mobile / tablet menu (hamburger) ---- */
+  .nav-burger{
+    display:none; width:44px; height:44px; margin:-8px -8px -8px 6px; flex:0 0 auto;
+    align-items:center; justify-content:center; background:transparent; border:1px solid var(--steel); border-radius:2px; color:var(--white);
+  }
+  .nav-burger .bars{ position:relative; width:18px; height:12px; }
+  .nav-burger .bars span{ position:absolute; left:0; right:0; height:1.6px; background:currentColor; transition:transform .25s ease, opacity .2s ease, top .25s ease; }
+  .nav-burger .bars span:nth-child(1){ top:0; }
+  .nav-burger .bars span:nth-child(2){ top:5px; }
+  .nav-burger .bars span:nth-child(3){ top:10px; }
+  .nav-burger[aria-expanded="true"] .bars span:nth-child(1){ top:5px; transform:rotate(45deg); }
+  .nav-burger[aria-expanded="true"] .bars span:nth-child(2){ opacity:0; }
+  .nav-burger[aria-expanded="true"] .bars span:nth-child(3){ top:5px; transform:rotate(-45deg); }
+
+  .mobile-menu{
+    display:none; position:fixed; inset:0; z-index:190; background:rgba(10,11,13,.7);
+    opacity:0; pointer-events:none; transition:opacity .25s ease;
+  }
+  .mobile-menu.open{ opacity:1; pointer-events:auto; }
+  .mobile-menu-panel{
+    position:absolute; top:0; right:0; height:100%; width:min(340px,84vw);
+    background:var(--panel); border-left:1px solid var(--steel-soft);
+    padding:96px 28px 28px; display:flex; flex-direction:column; gap:8px;
+    transform:translateX(100%); transition:transform .3s cubic-bezier(.2,.7,.2,1);
+    overflow-y:auto;
+  }
+  .mobile-menu.open .mobile-menu-panel{ transform:translateX(0); }
+  .mobile-menu-panel a.mm-link{
+    padding:16px 4px; border-bottom:1px solid var(--steel-soft);
+    font-family:var(--font-display); font-size:22px; text-transform:uppercase; letter-spacing:.01em; color:var(--white);
+  }
+  .mobile-menu-panel .mm-actions{ display:flex; flex-direction:column; gap:12px; margin-top:22px; }
+  .mobile-menu-panel .btn{ width:100%; }
+
+  @media (max-width:1000px){
+    .nav-links{ display:none; }
+    .nav-cta{ display:none; }
+    .nav-burger{ display:flex; }
+    .mobile-menu{ display:block; }
+  }
+  @media (min-width:1001px){ .mobile-menu{ display:none !important; } }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; min-height:100svh; display:flex; align-items:flex-end;
+    overflow:hidden; padding-top:120px;
+  }
+  .hero-slides{ position:absolute; inset:0; z-index:0; }
+  .hero-slide{
+    position:absolute; inset:0; opacity:0; transform:scale(1.08);
+    background:
+      radial-gradient(120% 90% at 15% 0%, rgba(255,106,26,.16), transparent 55%),
+      linear-gradient(160deg, var(--panel-2) 0%, var(--void) 62%);
+    transition:opacity 1.8s ease;
+  }
+  .hero-slide.active{ opacity:1; animation:kenburns 9s ease forwards; }
+  @keyframes kenburns{ from{ transform:scale(1.08) translate(0,0);} to{ transform:scale(1.16) translate(-1.4%,-1.2%);} }
+  .hero-slide .grid-overlay{ position:absolute; inset:0; opacity:.5; background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size:46px 46px; }
+  .hero-slide .rings{ position:absolute; right:-8%; top:8%; width:62vw; height:62vw; max-width:900px; max-height:900px;
+    border-radius:50%; border:1px solid rgba(255,106,26,.14); }
+  .hero-slide .rings::before{ content:""; position:absolute; inset:9%; border-radius:50%; border:1px solid rgba(170,176,184,.10); }
+  .hero-slide .rings::after{ content:""; position:absolute; inset:20%; border-radius:50%; border:1px dashed rgba(170,176,184,.08); }
+  .hero-scrim{ position:absolute; inset:0; z-index:1; background:linear-gradient(to top, var(--void) 4%, rgba(15,17,19,.35) 46%, rgba(15,17,19,.55) 100%); }
+
+  .hero-content{ position:relative; z-index:2; width:100%; padding-bottom:56px; }
+  .hero-badge{
+    display:inline-flex; align-items:center; gap:9px; font-family:var(--font-mono); font-size:11px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--chrome); border:1px solid var(--steel); padding:8px 14px; border-radius:2px; margin-bottom:26px;
+  }
+  .hero-badge .pulse{ width:7px; height:7px; border-radius:50%; background:var(--ember); box-shadow:0 0 0 0 var(--ember-glow); animation:pulse 2s infinite; }
+  @keyframes pulse{ 0%{ box-shadow:0 0 0 0 var(--ember-glow);} 70%{ box-shadow:0 0 0 8px rgba(255,106,26,0);} 100%{ box-shadow:0 0 0 0 rgba(255,106,26,0);} }
+
+  .hero-follow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+  .hf-item{
+    display:inline-flex; align-items:center; gap:8px; border:1px solid var(--steel); border-radius:2px;
+    padding:7px 13px; color:var(--chrome); transition:border-color .2s ease, color .2s ease, transform .2s ease;
+  }
+  .hf-item:hover{ border-color:var(--ember); color:var(--white); transform:translateY(-2px); }
+  .hf-item .icon{ width:15px; height:15px; min-width:15px; color:var(--ember); flex:0 0 auto; }
+  .hf-count{ font-family:var(--font-mono); font-weight:700; font-size:13px; color:var(--white); white-space:nowrap; }
+  .hf-label{ font-family:var(--font-mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--chrome-dim); white-space:nowrap; }
+  .hero-kicker{ font-family:var(--font-mono); font-size:23px; letter-spacing:.3em; text-transform:uppercase; color:var(--ember); margin-bottom:10px; }
+  .hero h1{ font-size:clamp(46px,9.4vw,124px); line-height:.9; }
+  .hero h1 span{ display:block; }
+  .hero h1 .outline-text{ -webkit-text-stroke:1.5px var(--chrome); color:transparent; }
+  .hero-line{ font-size:clamp(22px,3.4vw,38px); font-family:var(--font-display); font-weight:700; text-transform:uppercase; color:var(--white); margin-top:6px; }
+  .hero-sub{ color:var(--chrome); max-width:52ch; margin-top:22px; font-size:16px; }
+  .hero-actions{ display:flex; flex-wrap:wrap; gap:16px; margin-top:36px; }
+
+  .hero-stats{
+    position:relative; z-index:2; margin-top:56px; border-top:1px solid var(--steel-soft);
+    display:grid; grid-template-columns:repeat(4,1fr);
+  }
+  .hero-stat{ padding:22px clamp(0px,2vw,24px) 0; border-right:1px solid var(--steel-soft); }
+  .hero-stat:last-child{ border-right:none; }
+  .hero-stat .num{ font-family:var(--font-mono); font-size:12px; color:var(--ember); letter-spacing:.12em; }
+  .hero-stat .label{ font-family:var(--font-display); font-size:clamp(14px,1.6vw,19px); text-transform:uppercase; margin-top:6px; letter-spacing:.01em; }
+  @media (max-width:820px){
+    .hero-stats{ grid-template-columns:repeat(2,1fr); }
+    .hero-stat:nth-child(2){ border-right:none; }
+  }
+
+  .scroll-cue{ position:absolute; z-index:2; right:clamp(20px,5vw,64px); bottom:26px; display:flex; flex-direction:column; align-items:center; gap:10px; color:var(--chrome-dim); }
+  .scroll-cue span{ writing-mode:vertical-rl; font-family:var(--font-mono); font-size:10px; letter-spacing:.2em; text-transform:uppercase; }
+  .scroll-cue .line{ width:1px; height:46px; background:linear-gradient(to bottom, var(--ember), transparent); animation:cue 1.8s ease-in-out infinite; }
+  @keyframes cue{ 0%,100%{ transform:scaleY(1); opacity:.5;} 50%{ transform:scaleY(.5); opacity:1;} }
+
+  /* ---------- STRIP ---------- */
+  .strip{ border-top:1px solid var(--steel-soft); border-bottom:1px solid var(--steel-soft); background:var(--panel); }
+  .strip-inner{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:28px; padding:26px clamp(20px,5vw,64px); }
+  .social-row{ display:flex; gap:16px; }
+  .social-row a{
+    width:38px; height:38px; border:1px solid var(--steel); border-radius:50%; display:flex; align-items:center; justify-content:center;
+    color:var(--chrome); transition:border-color .2s, color .2s, transform .2s;
+  }
+  .social-row a:hover{ border-color:var(--ember); color:var(--ember); transform:translateY(-3px); }
+  .achv-row{ display:flex; flex-wrap:wrap; gap:10px; }
+  .achv-card{
+    font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--chrome);
+    border:1px solid var(--steel); padding:9px 14px; border-radius:2px;
+    transition:opacity .6s ease, transform .6s ease, border-color .2s, color .2s;
+  }
+  .achv-card.js-hidden{ opacity:0; transform:translateY(10px); }
+  .achv-card.in{ opacity:1; transform:translateY(0); }
+  .achv-card:hover{ border-color:var(--ember); color:var(--white); }
+
+  /* ---------- REVEAL ---------- */
+  /* Reveal-on-scroll: visible by default (progressive enhancement).
+     JS only hides these just-in-time if IntersectionObserver is actually supported,
+     so a blocked/broken script never leaves content invisible. */
+  .reveal, .achv-card, .t-step{ transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+  .reveal.js-hidden{ opacity:0; transform:translateY(28px); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  .reveal-delay-1.in{ transition-delay:.08s; }
+  .reveal-delay-2.in{ transition-delay:.16s; }
+  .reveal-delay-3.in{ transition-delay:.24s; }
+  .reveal-delay-4.in{ transition-delay:.32s; }
+  .reveal-delay-5.in{ transition-delay:.40s; }
+  .reveal-delay-6.in{ transition-delay:.48s; }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns:1.05fr 1fr; gap:64px; align-items:center; }
+  @media (max-width:900px){ .about-grid{ grid-template-columns:1fr; gap:44px; } }
+  .about-visual{ position:relative; aspect-ratio:4/5; border:1px solid var(--steel); border-radius:2px; overflow:hidden; background:
+      radial-gradient(120% 100% at 100% 0%, rgba(255,106,26,.14), transparent 55%), var(--panel); }
+  @media (max-width:600px){ .about-visual{ aspect-ratio:16/11; } }
+  .about-visual .blueprint{ position:absolute; inset:0; opacity:.5; background-image:
+      linear-gradient(rgba(170,176,184,.09) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(170,176,184,.09) 1px, transparent 1px);
+      background-size:30px 30px; }
+  .about-visual svg{ position:absolute; inset:0; width:100%; height:100%; }
+  .about-visual .tag{ position:absolute; bottom:18px; left:18px; font-family:var(--font-mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--chrome-dim); border:1px solid var(--steel); padding:8px 12px; background:rgba(15,17,19,.6); }
+  .about-copy .section-head{ margin-bottom:24px; }
+  .about-points{ margin-top:30px; display:grid; gap:16px; }
+  .about-point{ display:flex; gap:14px; align-items:flex-start; padding-top:16px; border-top:1px solid var(--steel-soft); }
+  .about-point .idx{ font-family:var(--font-mono); font-size:12px; color:var(--ember); padding-top:2px; }
+  .about-point h4{ font-family:var(--font-body); font-weight:600; text-transform:none; letter-spacing:0; font-size:15px; margin-bottom:4px; }
+  .about-point p{ color:var(--chrome-dim); font-size:14px; }
+
+  /* ---------- BRAND SELECTOR ---------- */
+  .brand-tabs{ display:flex; flex-wrap:wrap; gap:10px; margin-top:44px; margin-bottom:34px; }
+  .brand-tab{
+    background:transparent; border:1px solid var(--steel); color:var(--chrome); padding:12px 20px;
+    font-family:var(--font-display); font-weight:700; font-size:15px; text-transform:uppercase; letter-spacing:.02em;
+    border-radius:2px; transition:all .25s ease; position:relative;
+  }
+  .brand-tab:hover{ border-color:var(--chrome); color:var(--white); }
+  .brand-tab.active{ background:var(--ember); border-color:var(--ember); color:#181005; }
+  .brand-panel{ display:none; }
+  .brand-panel.active{ display:block; animation:fadeUp .5s ease; }
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(14px);} to{ opacity:1; transform:translateY(0);} }
+  .brand-layout{ display:grid; grid-template-columns:.85fr 1.15fr; gap:0; border:1px solid var(--steel-soft); }
+  @media (max-width:820px){ .brand-layout{ grid-template-columns:1fr; } }
+  .brand-visual{ position:relative; background:var(--panel); border-right:1px solid var(--steel-soft); padding:36px; display:flex; flex-direction:column; justify-content:space-between; min-height:280px; }
+  @media (max-width:820px){ .brand-visual{ border-right:none; border-bottom:1px solid var(--steel-soft); } }
+  .brand-visual .silhouette{ opacity:.9; width:100%; height:auto; }
+  .brand-visual .note{ font-family:var(--font-mono); font-size:11px; color:var(--chrome-dim); letter-spacing:.1em; text-transform:uppercase; }
+  .model-grid{ padding:36px; display:grid; grid-template-columns:repeat(2,1fr); gap:2px; background:var(--steel-soft); }
+  @media (max-width:520px){ .model-grid{ grid-template-columns:1fr; } }
+  .model-chip{ background:var(--panel-2); padding:18px 20px; transition:background .2s; }
+  .model-chip:hover{ background:#252a30; }
+  .model-chip .m-name{ font-weight:600; font-size:15px; }
+  .model-chip .m-note{ color:var(--chrome-dim); font-size:12.5px; margin-top:2px; }
+  .brand-disclaimer{ margin-top:18px; font-size:12.5px; color:var(--chrome-dim); }
+
+  /* ---------- SERVICES ---------- */
+  .service-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--steel-soft); margin-top:48px; border:1px solid var(--steel-soft); }
+  @media (max-width:900px){ .service-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .service-grid{ grid-template-columns:1fr; } }
+  .service-card{
+    background:var(--panel); padding:30px 26px; position:relative; overflow:hidden; transition:transform .3s ease, background .3s ease;
+  }
+  .service-card:hover{ transform:translateY(-4px); background:var(--panel-2); }
+  .service-card .s-icon{ width:38px; height:38px; color:var(--ember); margin-bottom:20px; transition:transform .3s ease; }
+  .service-card:hover .s-icon{ transform:rotate(-8deg) scale(1.08); }
+  .service-card h4{ font-family:var(--font-body); font-weight:600; text-transform:none; letter-spacing:0; font-size:16px; margin-bottom:8px; }
+  .service-card p{ color:var(--chrome-dim); font-size:13.5px; max-height:0; opacity:0; overflow:hidden; transition:max-height .35s ease, opacity .35s ease, margin-top .35s ease; }
+  .service-card:hover p{ max-height:60px; opacity:1; margin-top:4px; }
+  .service-card .s-tag{ position:absolute; top:22px; right:24px; font-family:var(--font-mono); font-size:10px; color:var(--steel); }
+
+  /* ---------- CUSTOMIZATION (MODS & WRAPS) ---------- */
+  .mod-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:2px; background:var(--steel-soft); margin-top:48px; border:1px solid var(--steel-soft); }
+  @media (max-width:760px){ .mod-grid{ grid-template-columns:1fr; } }
+  .mod-card{
+    background:var(--void); padding:clamp(30px,4vw,44px); position:relative; overflow:hidden;
+    transition:background .3s ease;
+  }
+  .mod-card:hover{ background:var(--panel-2); }
+  .mod-card::after{
+    content:""; position:absolute; right:-40px; bottom:-40px; width:160px; height:160px; border-radius:50%;
+    border:1px solid var(--steel-soft); opacity:0; transform:scale(.7); transition:opacity .3s ease, transform .4s ease;
+  }
+  .mod-card:hover::after{ opacity:1; transform:scale(1); }
+  .mod-photo{
+    position:relative; aspect-ratio:16/10; overflow:hidden; border:1px solid var(--steel-soft);
+    margin-bottom:24px; background:linear-gradient(155deg, var(--panel-2), var(--void));
+  }
+  .mod-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .mod-photo .mod-photo-fallback{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center; padding:20px;
+    font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--chrome-dim);
+  }
+  .mod-badge{
+    position:absolute; top:14px; left:14px; width:34px; height:34px; border-radius:50%;
+    background:rgba(15,17,19,.75); border:1px solid var(--steel); display:flex; align-items:center; justify-content:center;
+  }
+  .mod-badge .icon{ width:16px; height:16px; color:var(--ember); }
+  .mod-num{ font-family:var(--font-mono); font-size:12px; color:var(--steel); margin-bottom:14px; }
+  .mod-card h3{ font-family:var(--font-display); font-size:clamp(24px,2.6vw,30px); text-transform:uppercase; margin-bottom:14px; }
+  .mod-card p{ color:var(--chrome-dim); font-size:14.5px; max-width:42ch; margin-bottom:26px; }
+  .mod-card .btn{ position:relative; z-index:1; }
+
+  /* ---------- EXPERIENCE TIMELINE ---------- */
+  .timeline{ margin-top:56px; display:grid; grid-template-columns:repeat(6,1fr); gap:0; border-top:1px solid var(--steel-soft); }
+  @media (max-width:960px){ .timeline{ grid-template-columns:repeat(3,1fr); } }
+  @media (max-width:560px){ .timeline{ grid-template-columns:1fr; } }
+  .t-step{ padding:26px 20px 26px 0; border-right:1px solid var(--steel-soft); position:relative; }
+  .timeline > .t-step:nth-child(6n){ border-right:none; }
+  @media (max-width:960px){ .timeline > .t-step:nth-child(3n){ border-right:none; } }
+  @media (max-width:560px){ .t-step{ border-right:none !important; border-bottom:1px solid var(--steel-soft); } }
+  .t-step .t-num{ font-family:var(--font-mono); font-size:12px; color:var(--ember); }
+  .t-step h4{ font-family:var(--font-display); font-size:17px; margin-top:10px; text-transform:uppercase; }
+  .t-step .t-bar{ width:0; height:2px; background:var(--ember); margin-top:14px; transition:width .8s ease; }
+  .t-step.in .t-bar{ width:100%; }
+  .exp-quote{ margin-top:60px; border-left:2px solid var(--ember); padding-left:24px; max-width:60ch; color:var(--chrome); font-size:17px; font-style:italic; }
+
+  /* ---------- REVIEWS ---------- */
+  .review-head{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:24px; }
+  .review-track-wrap{ overflow:hidden; margin-top:44px; }
+  .review-track{ display:flex; gap:20px; transition:transform .5s cubic-bezier(.2,.7,.2,1); }
+  .review-card{
+    flex:0 0 min(400px,86vw); background:var(--panel); border:1px solid var(--steel-soft); padding:28px; border-radius:2px;
+  }
+  .review-card .stars{ color:var(--ember); font-family:var(--font-mono); letter-spacing:.15em; font-size:14px; }
+  .review-card p{ color:var(--chrome); margin-top:16px; font-size:14.5px; }
+  .review-card .who{ margin-top:22px; display:flex; align-items:center; gap:12px; }
+  .review-card .avatar{ width:38px; height:38px; border-radius:50%; background:var(--panel-2); border:1px solid var(--steel); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); color:var(--ember); font-size:14px; }
+  .review-card .name{ font-weight:600; font-size:13.5px; }
+  .review-card .bike{ color:var(--chrome-dim); font-size:12px; font-family:var(--font-mono); }
+  .review-controls{ display:flex; gap:12px; margin-top:28px; align-items:center; }
+  .review-controls button{ width:40px; height:40px; border:1px solid var(--steel); background:transparent; color:var(--chrome); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:.2s; }
+  .review-controls button:hover{ border-color:var(--ember); color:var(--ember); }
+  .sample-flag{ font-family:var(--font-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--chrome-dim); margin-top:18px; }
+
+  /* ---------- WHY ---------- */
+  .why-grid{ display:grid; grid-template-columns:repeat(3,1fr); margin-top:48px; border-top:1px solid var(--steel-soft); border-left:1px solid var(--steel-soft); }
+  @media (max-width:860px){ .why-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .why-grid{ grid-template-columns:1fr; } }
+  .why-card{ border-right:1px solid var(--steel-soft); border-bottom:1px solid var(--steel-soft); padding:34px 28px; position:relative; overflow:hidden; }
+  .why-card .why-num{ font-family:var(--font-mono); font-size:11px; color:var(--steel); }
+  .why-card h4{ font-size:19px; margin-top:38px; }
+  .why-card p{ color:var(--chrome-dim); font-size:13.5px; margin-top:10px; max-width:32ch; }
+  .why-card::after{ content:""; position:absolute; right:-30px; bottom:-30px; width:110px; height:110px; border-radius:50%; border:1px solid var(--steel-soft); opacity:0; transition:opacity .3s ease, transform .4s ease; transform:scale(.7); }
+  .why-card:hover::after{ opacity:1; transform:scale(1); }
+  .why-card:hover{ background:var(--panel); }
+
+  /* ---------- CTA BAND ---------- */
+  .cta-band{ position:relative; padding:clamp(80px,14vw,150px) 0; overflow:hidden; text-align:center; border-top:1px solid var(--steel-soft); border-bottom:1px solid var(--steel-soft); }
+  .cta-band .cta-bg{ position:absolute; inset:0; background:
+      radial-gradient(65% 60% at 50% 30%, rgba(255,106,26,.16), transparent 70%), var(--panel); }
+  .cta-band .speedlines{ position:absolute; inset:0; overflow:hidden; opacity:.5; }
+  .speedline{ position:absolute; height:1px; width:140%; left:-20%; background:linear-gradient(90deg, transparent, var(--steel), transparent); animation:speed 3.4s linear infinite; }
+  @keyframes speed{ from{ transform:translateX(-8%);} to{ transform:translateX(8%);} }
+  .cta-band .inner{ position:relative; z-index:2; }
+  .cta-band h2{ font-size:clamp(38px,7vw,86px); }
+  .cta-band p{ color:var(--chrome); margin:22px auto 0; max-width:48ch; }
+  .cta-actions{ display:flex; flex-wrap:wrap; gap:16px; justify-content:center; margin-top:40px; }
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:64px; margin-top:48px; align-items:start; }
+  @media (max-width:940px){ .contact-grid{ grid-template-columns:1fr; gap:44px; } }
+  .info-list{ display:grid; gap:0; border-top:1px solid var(--steel-soft); }
+  .info-row{ display:flex; gap:18px; padding:20px 0; border-bottom:1px solid var(--steel-soft); }
+  .info-row .ic{ width:20px; height:20px; color:var(--ember); flex:0 0 auto; margin-top:2px; }
+  .info-row .label{ font-family:var(--font-mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--chrome-dim); }
+  .info-row .val{ font-size:15px; margin-top:4px; }
+  .info-row .val a{ border-bottom:1px solid var(--steel); transition:color .2s ease, border-color .2s ease; }
+  .info-row .val a:hover{ color:var(--ember); border-color:var(--ember); }
+  .map-box{ margin-top:28px; aspect-ratio:16/9; border:1px solid var(--steel); position:relative; overflow:hidden; background:var(--panel); }
+  .map-box .grid-overlay{ position:absolute; inset:0; opacity:.4; background-image:
+      linear-gradient(rgba(170,176,184,.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(170,176,184,.1) 1px, transparent 1px);
+      background-size:34px 34px; }
+  .map-box .pin{ position:absolute; left:50%; top:50%; transform:translate(-50%,-100%); color:var(--ember); }
+  .map-box .maptext{ position:absolute; bottom:14px; left:14px; font-family:var(--font-mono); font-size:10.5px; color:var(--chrome-dim); }
+
+  .form-panel{ background:var(--panel); border:1px solid var(--steel-soft); padding:clamp(24px,4vw,40px); }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:520px){ .form-row{ grid-template-columns:1fr; } }
+  .field{ margin-bottom:18px; }
+  .field label{ display:block; font-family:var(--font-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--chrome-dim); margin-bottom:8px; }
+  .field input, .field select, .field textarea{
+    width:100%; background:var(--void); border:1px solid var(--steel); color:var(--white); padding:13px 14px; font-family:var(--font-body); font-size:16px; border-radius:2px;
+    transition:border-color .2s;
+  }
+  /* 16px stops iOS Safari auto-zooming into the field on focus */
+  .field input:focus, .field select:focus, .field textarea:focus{ border-color:var(--ember); outline:none; }
+  .field textarea{ resize:vertical; min-height:90px; }
+  .form-note{ font-size:12px; color:var(--chrome-dim); margin-top:14px; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ background:var(--panel); border-top:1px solid var(--steel-soft); padding:64px 0 110px; }
+  .foot-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:44px; }
+  @media (max-width:760px){ .foot-grid{ grid-template-columns:1fr; } }
+  .foot-tag{ color:var(--chrome-dim); margin-top:14px; font-size:14px; max-width:34ch; }
+  .foot-col h5{ font-family:var(--font-mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--chrome-dim); margin-bottom:16px; }
+  .foot-links{ display:grid; gap:11px; font-size:14px; color:var(--chrome); }
+  .foot-links a:hover{ color:var(--ember); }
+  .foot-bottom{ margin-top:56px; padding-top:24px; border-top:1px solid var(--steel-soft); display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px; color:var(--chrome-dim); font-size:12.5px; }
+
+  /* ---------- MOBILE STICKY BAR ---------- */
+  .mobile-bar{
+    display:none; position:fixed; left:0; right:0; bottom:0; z-index:300; background:var(--panel); border-top:1px solid var(--steel-soft);
+    grid-template-columns:repeat(4,1fr);
+    padding-bottom:env(safe-area-inset-bottom, 0px);
+  }
+  .mobile-bar a{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; min-height:56px; padding:10px 4px; font-family:var(--font-mono); font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--chrome); border-right:1px solid var(--steel-soft); }
+  .mobile-bar a:last-child{ border-right:none; }
+  .mobile-bar a:active{ background:var(--panel-2); }
+  .mobile-bar svg{ width:19px; height:19px; color:var(--ember); }
+  @media (max-width:760px){
+    .mobile-bar{ display:grid; }
+    body{ padding-bottom:calc(56px + env(safe-area-inset-bottom, 0px)); }
+  }
+
+  /* ---------- RPM GAUGE (signature) ---------- */
+  .rpm-gauge{
+    position:fixed; right:22px; bottom:22px; z-index:250; width:78px; height:78px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  @media (max-width:760px){ .rpm-gauge{ right:12px; bottom:78px; width:60px; height:60px; } }
+  .rpm-gauge svg{ width:100%; height:100%; overflow:visible; }
+  .rpm-readout{ position:absolute; font-family:var(--font-mono); font-size:10px; color:var(--chrome); text-align:center; }
+  .rpm-readout b{ display:block; font-size:13px; color:var(--white); }
+
+  /* icons */
+  .icon{ width:100%; height:100%; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <a href="#top" class="brandmark">
+    <span class="dot"></span>
+    <span>Apache Bro<small>Bike Service Centre</small></span>
+  </a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#brands">Brands</a>
+    <a href="#services">Services</a>
+    <a href="#customization">Mods & Wraps</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-cta">
+    <a href="#map" class="btn btn-outline">Drive To Garage</a>
+    <a href="#bookingForm" class="btn btn-primary">Book A Service</a>
+  </div>
+  <button class="nav-burger" id="navBurger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+    <span class="bars"><span></span><span></span><span></span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-panel">
+    <a href="#about" class="mm-link">About</a>
+    <a href="#brands" class="mm-link">Brands</a>
+    <a href="#services" class="mm-link">Services</a>
+    <a href="#customization" class="mm-link">Mods & Wraps</a>
+    <a href="#reviews" class="mm-link">Reviews</a>
+    <a href="#contact" class="mm-link">Contact</a>
+    <div class="mm-actions">
+      <a href="#map" class="btn btn-outline">Drive To Garage</a>
+      <a href="#bookingForm" class="btn btn-primary">Book A Service</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="hero-slides" id="heroSlides">
+    <div class="hero-slide active"><div class="grid-overlay"></div><div class="rings"></div></div>
+    <div class="hero-slide"><div class="grid-overlay"></div><div class="rings"></div></div>
+    <div class="hero-slide"><div class="grid-overlay"></div><div class="rings"></div></div>
+    <div class="hero-slide"><div class="grid-overlay"></div><div class="rings"></div></div>
+  </div>
+  <div class="hero-scrim"></div>
+
+  <div class="wrap hero-content">
+    <div class="hero-badge"><span class="pulse"></span> Multi-Brand Motorcycle Specialists</div>
+
+    <div class="hero-kicker">Apache Bro Motoworks—Service.Mod.Wrap.</div>
+    <h1>
+      <span>THE GARAGE</span>
+      <span>BEHIND EVERY </span>
+      <span class="outline-text">PERFECT</span>
+      <span>RIDE.</span>
+    </h1>
+
+    <!-- FOLLOWER COUNT: update the numbers below whenever they change — no code changes needed elsewhere -->
+    <div class="hero-follow">
+      <a href="https://www.instagram.com/apache_bro03" target="_blank" rel="noopener" class="hf-item" aria-label="Instagram followers">
+        <svg class="icon" viewBox="0 0 24 24" width="15" height="15"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+        <span class="hf-count">37.4K</span><span class="hf-label">Instagram</span>
+      </a>
+      <a href="https://www.facebook.com/people/Apache-Bro/100037328986314/" target="_blank" rel="noopener" class="hf-item" aria-label="Facebook followers">
+        <svg class="icon" viewBox="0 0 24 24" width="15" height="15"><path d="M14 9h3V5h-3c-2.2 0-4 1.8-4 4v2H7v4h3v6h4v-6h3l1-4h-4V9c0-.6.4-1 1-1z"/></svg>
+        <span class="hf-count">8.2K</span><span class="hf-label">Facebook</span>
+      </a>
+      <a href="https://www.youtube.com/@ApacheBro" target="_blank" rel="noopener" class="hf-item" aria-label="YouTube subscribers">
+        <svg class="icon" viewBox="0 0 24 24" width="15" height="15"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M11 10l4 2-4 2z" fill="currentColor" stroke="none"/></svg>
+        <span class="hf-count">10.7K</span><span class="hf-label">YouTube</span>
+      </a>
+    </div>
+
+    <p class="hero-sub">From everyday commuters to high-performance machines, we service, repair and maintain motorcycles with precision — proper diagnosis first, honest work always.</p>
+    <div class="hero-actions">
+      <a href="#bookingForm" class="btn btn-primary">Book A Service</a>
+      <a href="#customization" class="btn btn-outline">Mods & Wraps</a>
+      <a href="tel:+917505591638" class="btn btn-outline">Call The Garage</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">01</div><div class="label">Multi-Brand<br>Expertise</div></div>
+      <div class="hero-stat"><div class="num">02</div><div class="label">Performance &<br>Commuter Bikes</div></div>
+      <div class="hero-stat"><div class="num">03</div><div class="label">Professional<br>Service</div></div>
+      <div class="hero-stat"><div class="num">04</div><div class="label">Customer<br>Trusted</div></div>
+    </div>
+  </div>
+
+  <div class="scroll-cue"><div class="line"></div><span>Scroll</span></div>
+</header>
+
+<!-- ============ STRIP ============ -->
+<section class="strip">
+  <div class="strip-inner">
+    <div class="social-row" aria-label="Social media">
+      <a href="https://www.instagram.com/apache_bro03" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg class="icon" viewBox="0 0 24 24" width="17" height="17"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+      </a>
+      <a href="https://www.facebook.com/people/Apache-Bro/100037328986314/" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg class="icon" viewBox="0 0 24 24" width="17" height="17"><path d="M14 9h3V5h-3c-2.2 0-4 1.8-4 4v2H7v4h3v6h4v-6h3l1-4h-4V9c0-.6.4-1 1-1z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@ApacheBro" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg class="icon" viewBox="0 0 24 24" width="17" height="17"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M11 10l4 2-4 2z" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://wa.me/917505591638" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg class="icon" viewBox="0 0 24 24" width="17" height="17"><path d="M7 17l-1.4 3 3.1-1.3A8 8 0 1 0 6 15z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5" /></svg>
+      </a>
+      <a href="#" aria-label="Google Business Profile" title="Google Business Profile (placeholder link)">
+        <svg class="icon" viewBox="0 0 24 24" width="17" height="17"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
+      </a>
+    </div>
+    <div class="achv-row" id="achvRow">
+      <div class="achv-card">Multi-Brand Expertise</div>
+      <div class="achv-card">Performance Bike Specialists</div>
+      <div class="achv-card">Trusted Local Workshop</div>
+      <div class="achv-card">Professional Diagnostics</div>
+      <div class="achv-card">Complete Bike Care</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section-pad" id="about">
+  <div class="wrap about-grid">
+    <div class="about-visual reveal">
+      <div class="blueprint"></div>
+      <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
+        <!-- schematic engine cross-section, line art -->
+        <g stroke="#3a4048" stroke-width="1.4" fill="none">
+          <circle cx="200" cy="230" r="120"/>
+          <circle cx="200" cy="230" r="86"/>
+          <circle cx="200" cy="230" r="40"/>
+          <line x1="200" y1="60" x2="200" y2="400"/>
+          <line x1="40" y1="230" x2="360" y2="230"/>
+          <line x1="88" y1="118" x2="312" y2="342"/>
+          <line x1="312" y1="118" x2="88" y2="342"/>
+        </g>
+        <g stroke="#ff6a1a" stroke-width="2.2" fill="none" opacity=".85">
+          <path d="M200 230 L200 150"/>
+          <circle cx="200" cy="230" r="4" fill="#ff6a1a" stroke="none"/>
+        </g>
+        <g fill="#aab0b8" font-family="JetBrains Mono" font-size="9" letter-spacing="1">
+          <text x="212" y="140">CYL-01</text>
+          <text x="30" y="226">INTAKE</text>
+          <text x="316" y="226">EXHAUST</text>
+        </g>
+      </svg>
+      <div class="tag">Fig. 01 — Diagnostics First</div>
+    </div>
+
+    <div class="about-copy">
+      <div class="section-head reveal">
+        <div class="eyebrow">About Apache Bro</div>
+        <h2>More than a service centre. It's a garage built around bikes.</h2>
+        <p class="lede" style="margin-top:18px;">Apache Bro works on motorcycles across manufacturers and categories — from practical daily commuters to powerful sports machines. Every bike that rolls in gets looked at properly before anything is touched.</p>
+      </div>
+      <div class="about-points">
+        <div class="about-point reveal reveal-delay-1">
+          <div class="idx">01</div>
+          <div><h4>Experienced mechanics</h4><p>Hands that know the difference between a Pulsar clutch and a Duke's.</p></div>
+        </div>
+        <div class="about-point reveal reveal-delay-2">
+          <div class="idx">02</div>
+          <div><h4>Proper diagnosis before repair</h4><p>We find the actual fault before we quote or touch a single part.</p></div>
+        </div>
+        <div class="about-point reveal reveal-delay-3">
+          <div class="idx">03</div>
+          <div><h4>Transparent communication</h4><p>You know what's wrong and what it costs before work begins.</p></div>
+        </div>
+        <div class="about-point reveal reveal-delay-4">
+          <div class="idx">04</div>
+          <div><h4>Preventive & performance-focused</h4><p>Routine maintenance and performance servicing, handled with the same care.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BRANDS ============ -->
+<section class="section-pad" id="brands" style="background:var(--panel); border-top:1px solid var(--steel-soft); border-bottom:1px solid var(--steel-soft);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Brands & Bikes We Service</div>
+      <h2>Your bike. Our expertise.</h2>
+      <p class="lede" style="margin-top:18px;">Select a manufacturer to see the range we work on. This isn't every model ever made — it's what rolls through the garage most.</p>
+    </div>
+
+    <div class="brand-tabs reveal" id="brandTabs" role="tablist" aria-label="Motorcycle brands">
+      <button class="brand-tab active" role="tab" id="tab-re" aria-selected="true" aria-controls="panel-re" data-brand="re">Royal Enfield</button>
+      <button class="brand-tab" role="tab" id="tab-ktm" aria-selected="false" aria-controls="panel-ktm" tabindex="-1" data-brand="ktm">KTM</button>
+      <button class="brand-tab" role="tab" id="tab-bajaj" aria-selected="false" aria-controls="panel-bajaj" tabindex="-1" data-brand="bajaj">Bajaj</button>
+      <button class="brand-tab" role="tab" id="tab-yamaha" aria-selected="false" aria-controls="panel-yamaha" tabindex="-1" data-brand="yamaha">Yamaha</button>
+      <button class="brand-tab" role="tab" id="tab-kawasaki" aria-selected="false" aria-controls="panel-kawasaki" tabindex="-1" data-brand="kawasaki">Kawasaki</button>
+      <button class="brand-tab" role="tab" id="tab-suzuki" aria-selected="false" aria-controls="panel-suzuki" tabindex="-1" data-brand="suzuki">Suzuki</button>
+      <button class="brand-tab" role="tab" id="tab-honda" aria-selected="false" aria-controls="panel-honda" tabindex="-1" data-brand="honda">Honda</button>
+    </div>
+
+    <div id="brandPanels">
+      <!-- Royal Enfield -->
+      <div class="brand-panel active" data-panel="re" role="tabpanel" id="panel-re" aria-labelledby="tab-re" tabindex="0">
+        <div class="brand-layout">
+          <div class="brand-visual">
+            <svg class="silhouette" viewBox="0 0 300 140"><g stroke="#767c82" stroke-width="2" fill="none"><circle cx="60" cy="105" r="26"/><circle cx="230" cy="105" r="26"/><path d="M60 105 L120 60 L170 60 L230 105 M120 60 L100 105 M170 60 L190 40 L215 40"/><rect x="70" y="45" width="55" height="18" rx="4" stroke="#ff6a1a"/></g></svg>
+            <div class="note">Classic thumper architecture — long-stroke singles, cast wheels, kick + electric start variants.</div>
+          </div>
+          <div>
+            <div class="model-grid">
+              <div class="model-chip"><div class="m-name">Classic</div><div class="m-note">Retro single-cylinder</div></div>
+              <div class="model-chip"><div class="m-name">Hunter</div><div class="m-note">Compact roadster</div></div>
+              <div class="model-chip"><div class="m-name">Meteor</div><div class="m-note">Cruiser</div></div>
+              <div class="model-chip"><div class="m-name">Continental GT</div><div class="m-note">Café racer</div></div>
+              <div class="model-chip"><div class="m-name">Interceptor</div><div class="m-note">Twin-cylinder roadster</div></div>
+              <div class="model-chip"><div class="m-name">Himalayan</div><div class="m-note">Adventure tourer</div></div>
+            </div>
+            <p class="brand-disclaimer wrap" style="padding:0 36px 28px;">Other Royal Enfield models also serviced. Not an authorized or manufacturer-certified service centre.</p>
+          </div>
+        </div>
+      </div>
+      <!-- KTM -->
+      <div class="brand-panel" data-panel="ktm" role="tabpanel" id="panel-ktm" aria-labelledby="tab-ktm" tabindex="0">
+        <div class="brand-layout">
+          <div class="brand-visual">
+            <svg class="silhouette" viewBox="0 0 300 140"><g stroke="#767c82" stroke-width="2" fill="none"><circle cx="60" cy="105" r="24"/><circle cx="235" cy="105" r="24"/><path d="M60 105 L100 55 L160 55 L235 105 M100 55 L140 40 L180 40"/></g><g stroke="#ff6a1a" stroke-width="2"><line x1="140" y1="40" x2="150" y2="70"/></g></svg>
+            <div class="note">Sharp, upright geometry — single-cylinder streetfighters and adventure/sport machines.</div>
+          </div>
+          <div>
+            <div class="model-grid">
+              <div class="model-chip"><div class="m-name">Duke Series</div><div class="m-note">Naked streetfighter</div></div>
+              <div class="model-chip"><div class="m-name">RC Series</div><div class="m-note">Full-fairing sport</div></div>
+              <div class="model-chip"><div class="m-name">Adventure</div><div class="m-note">Off-road tourer</div></div>
+              <div class="model-chip"><div class="m-name">Other Models</div><div class="m-note">Ask at check-in</div></div>
+            </div>
+            <p class="brand-disclaimer wrap" style="padding:0 36px 28px;">High-strung single and twin-cylinder engines serviced with performance-spec care. Not an authorized or manufacturer-certified service centre.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Bajaj -->
+      <div class="brand-panel" data-panel="bajaj" role="tabpanel" id="panel-bajaj" aria-labelledby="tab-bajaj" tabindex="0">
+        <div class="brand-layout">
+          <div class="brand-visual">
+            <svg class="silhouette" viewBox="0 0 300 140"><g stroke="#767c82" stroke-width="2" fill="none"><circle cx="58" cy="105" r="25"/><circle cx="232" cy="105" r="25"/><path d="M58 105 L110 60 L165 60 L232 105 M110 60 L95 105"/></g></svg>
+            <div class="note">India's daily-driver workhorse — the widest range of any brand we see, commuter to sport.</div>
+          </div>
+          <div>
+            <div class="model-grid">
+              <div class="model-chip"><div class="m-name">Pulsar</div><div class="m-note">N-Series & F-Series</div></div>
+              <div class="model-chip"><div class="m-name">Dominar</div><div class="m-note">Sport tourer</div></div>
+              <div class="model-chip"><div class="m-name">N-Series</div><div class="m-note">Naked streetfighter</div></div>
+              <div class="model-chip"><div class="m-name">F-Series</div><div class="m-note">Faired sport commuter</div></div>
+            </div>
+            <p class="brand-disclaimer wrap" style="padding:0 36px 28px;">From city commuting to spirited weekend riding. Not an authorized or manufacturer-certified service centre.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Yamaha -->
+      <div class="brand-panel" data-panel="yamaha" role="tabpanel" id="panel-yamaha" aria-labelledby="tab-yamaha" tabindex="0">
+        <div class="brand-layout">
+          <div class="brand-visual">
+            <svg class="silhouette" viewBox="0 0 300 140"><g stroke="#767c82" stroke-width="2" fill="none"><circle cx="60" cy="105" r="25"/><circle cx="228" cy="105" r="25"/><path d="M60 105 L115 58 L175 58 L228 105 M115 58 L100 100"/></g></svg>
+            <div class="note">High-revving four-strokes — sport, naked and street models built to be ridden hard.</div>
+          </div>
+          <div>
+            <div class="model-grid">
+              <div class="model-chip"><div class="m-name">R15</div><div class="m-note">Full-fairing sport</div></div>
+              <div class="model-chip"><div class="m-name">MT Series</div><div class="m-note">Naked streetfighter</div></div>
+              <div class="model-chip"><div class="m-name">FZ Series</div><div class="m-note">Muscular street</div></div>
+              <div class="model-chip"><div class="m-name">Other Models</div><div class="m-note">Ask at check-in</div></div>
+            </div>
+            <p class="brand-disclaimer wrap" style="padding:0 36px 28px;">Precision valve and clutch work for high-rev engines. Not an authorized or manufacturer-certified service centre.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Kawasaki -->
+      <div class="brand-panel" data-panel="kawasaki" role="tabpanel" id="panel-kawasaki" aria-labelledby="tab-kawasaki" tabindex="0">
+        <div class="brand-layout">
+          <div class="brand-visual">
+            <svg class="silhouette" viewBox="0 0 300 140"><g stroke="#767c82" stroke-width="2" fill="none"><circle cx="58" cy="108" r="24"/><circle cx="235" cy="108" r="24"/><path d="M58 108 L118 55 L185 55 L235 108 M118 55 L108 108"/></g></svg>
+            <div class="note">Performance-first machines — sport and streetfighter platforms up to litre-class.</div>
+          </div>
+          <div>
+            <div class="model-grid">
+              <div class="model-chip"><div class="m-name">Ninja Series</div><div class="m-note">Full-fairing sport</div></div>
+              <div class="model-chip"><div class="m-name">Z Series</div><div class="m-note">Naked streetfighter</div></div>
+              <div class="model-chip"><div class="m-name">Other Models</div><div class="m-note">Ask at check-in</div></div>
+              <div class="model-chip"><div class="m-name">Performance Inspection</div><div class="m-note">Pre-track checks</div></div>
+            </div>
+            <p class="brand-disclaimer wrap" style="padding:0 36px 28px;">Track-conscious inspections for higher-output engines. Not an authorized or manufacturer-certified service centre.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Suzuki -->
+      <div class="brand-panel" data-panel="suzuki" role="tabpanel" id="panel-suzuki" aria-labelledby="tab-suzuki" tabindex="0">
+        <div class="brand-layout">
+          <div class="brand-visual">
+            <svg class="silhouette" viewBox="0 0 300 140"><g stroke="#767c82" stroke-width="2" fill="none"><circle cx="60" cy="105" r="25"/><circle cx="230" cy="105" r="25"/><path d="M60 105 L112 58 L178 58 L230 105 M112 58 L98 105"/></g></svg>
+            <div class="note">From nimble street bikes to the flagship hyper-sport — a wide performance spread.</div>
+          </div>
+          <div>
+            <div class="model-grid">
+              <div class="model-chip"><div class="m-name">Gixxer</div><div class="m-note">Street / faired</div></div>
+              <div class="model-chip"><div class="m-name">V-Strom</div><div class="m-note">Adventure tourer</div></div>
+              <div class="model-chip"><div class="m-name">Hayabusa</div><div class="m-note">Hyper-sport flagship</div></div>
+              <div class="model-chip"><div class="m-name">Other Models</div><div class="m-note">Ask at check-in</div></div>
+            </div>
+            <p class="brand-disclaimer wrap" style="padding:0 36px 28px;">Careful, respectful handling of flagship performance machines. Not an authorized or manufacturer-certified service centre.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Honda -->
+      <div class="brand-panel" data-panel="honda" role="tabpanel" id="panel-honda" aria-labelledby="tab-honda" tabindex="0">
+        <div class="brand-layout">
+          <div class="brand-visual">
+            <svg class="silhouette" viewBox="0 0 300 140"><g stroke="#767c82" stroke-width="2" fill="none"><circle cx="58" cy="106" r="25"/><circle cx="232" cy="106" r="25"/><path d="M58 106 L114 62 L172 62 L232 106 M114 62 L100 106"/></g></svg>
+            <div class="note">Reliability-first engineering — the everyday commuters we service most often.</div>
+          </div>
+          <div>
+            <div class="model-grid">
+              <div class="model-chip"><div class="m-name">CB Series</div><div class="m-note">Street / naked</div></div>
+              <div class="model-chip"><div class="m-name">Hornet</div><div class="m-note">Streetfighter</div></div>
+              <div class="model-chip"><div class="m-name">Shine</div><div class="m-note">Daily commuter</div></div>
+              <div class="model-chip"><div class="m-name">Unicorn</div><div class="m-note">Daily commuter</div></div>
+            </div>
+            <p class="brand-disclaimer wrap" style="padding:0 36px 28px;">High-mileage commuter care alongside naked street models. Not an authorized or manufacturer-certified service centre.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="section-pad" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Service Menu</div>
+      <h2>From oil changes to performance setups.</h2>
+    </div>
+
+    <div class="service-grid" id="serviceGrid">
+      <!-- 15 services -->
+    </div>
+  </div>
+</section>
+
+<!-- ============ CUSTOMIZATION (MODS & WRAPS) ============ -->
+<section class="section-pad" id="customization">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Beyond Servicing</div>
+      <h2>Make it yours.</h2>
+      <p class="lede" style="margin-top:18px;">Modification and wrap work, handled with the same care as a service — planned properly, done right the first time.</p>
+    </div>
+
+    <div class="mod-grid">
+      <div class="mod-card reveal">
+        <!-- Swap the src below for a real photo — filename: images/bike-modification.jpg -->
+        <div class="mod-photo">
+          <img src="images/bike-modification.jpeg" alt="Custom modified motorcycle"
+               loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="mod-photo-fallback" style="display:none;">Add a photo here<br>images/bike-modification.jpg</div>
+          <div class="mod-badge"><svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2-2 2.8-2.8z"/></svg></div>
+        </div>
+        <div class="mod-num">01</div>
+        <h3>Bike Modification</h3>
+        <p>Custom builds and upgrades — from cosmetic touches to performance parts, planned around how you actually ride.</p>
+        <a href="#bookingForm" class="btn btn-outline">Enquire About Modification</a>
+      </div>
+      <div class="mod-card reveal reveal-delay-1">
+        <!-- Swap the src below for a real photo — filename: images/bike-wrap.jpg -->
+        <div class="mod-photo">
+          <img src="images/bike-wrap.jpeg" alt="Motorcycle with a vinyl wrap finish"
+               loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="mod-photo-fallback" style="display:none;">Add a photo here<br>images/bike-wrap.jpg</div>
+          <div class="mod-badge"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5-9-5z"/><path d="M3 13l9 5 9-5"/></svg></div>
+        </div>
+        <div class="mod-num">02</div>
+        <h3>Bike Wrap</h3>
+        <p>Vinyl wraps and decals for a fresh look without committing to a full repaint — clean install, no bubbling, no shortcuts.</p>
+        <a href="#bookingForm" class="btn btn-outline">Enquire About Wraps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section class="section-pad" style="background:var(--panel); border-top:1px solid var(--steel-soft); border-bottom:1px solid var(--steel-soft);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">The Process</div>
+      <h2>The Apache Bro experience.</h2>
+    </div>
+
+    <div class="timeline" id="timeline">
+      <div class="t-step"><div class="t-num">01</div><h4>Bike Check-In</h4><div class="t-bar"></div></div>
+      <div class="t-step"><div class="t-num">02</div><h4>Diagnosis</h4><div class="t-bar"></div></div>
+      <div class="t-step"><div class="t-num">03</div><h4>Service Plan</h4><div class="t-bar"></div></div>
+      <div class="t-step"><div class="t-num">04</div><h4>Precision Work</h4><div class="t-bar"></div></div>
+      <div class="t-step"><div class="t-num">05</div><h4>Quality Check</h4><div class="t-bar"></div></div>
+      <div class="t-step"><div class="t-num">06</div><h4>Ready To Ride</h4><div class="t-bar"></div></div>
+    </div>
+
+    <p class="exp-quote reveal">"Your motorcycle deserves more than a quick fix. We diagnose the problem, explain the work, and focus on getting your bike back on the road properly."</p>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section class="section-pad" id="reviews">
+  <div class="wrap">
+    <div class="review-head reveal">
+      <div class="section-head">
+        <div class="eyebrow">Customer Reviews</div>
+        <h2>Riders speak. We listen.</h2>
+      </div>
+      <div>
+        <p style="color:var(--chrome); margin-bottom:14px;">Had your bike serviced here? Share your experience.</p>
+        <a href="#" class="btn btn-outline">Leave A Review</a>
+      </div>
+    </div>
+
+    <div class="review-track-wrap reveal">
+      <div class="review-track" id="reviewTrack">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>"Explained exactly what was wrong with the clutch before touching it. No upselling, just honest work."</p>
+          <div class="who"><div class="avatar">R</div><div><div class="name">Rider — sample review</div><div class="bike">Royal Enfield Himalayan</div></div></div>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>"Took my Duke in for a pre-track inspection, they caught a worn brake line I'd missed. Appreciated the detail."</p>
+          <div class="who"><div class="avatar">R</div><div><div class="name">Rider — sample review</div><div class="bike">KTM Duke 390</div></div></div>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★☆</div>
+          <p>"Straightforward general service on my Pulsar, done properly and on time. Fair pricing."</p>
+          <div class="who"><div class="avatar">R</div><div><div class="name">Rider — sample review</div><div class="bike">Bajaj Pulsar N250</div></div></div>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>"Chain and sprocket set replaced correctly, alignment checked properly. Bike feels smoother than before."</p>
+          <div class="who"><div class="avatar">R</div><div><div class="name">Rider — sample review</div><div class="bike">Yamaha R15</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="review-controls reveal">
+      <button aria-label="Previous review" id="revPrev">‹</button>
+      <button aria-label="Next review" id="revNext">›</button>
+    </div>
+    <p class="sample-flag">Reviews above are sample content until real customer reviews are added.</p>
+  </div>
+</section>
+
+<!-- ============ WHY ============ -->
+<section class="section-pad" style="background:var(--panel); border-top:1px solid var(--steel-soft); border-bottom:1px solid var(--steel-soft);">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Why Riders Choose Us</div>
+      <h2>Why riders choose Apache Bro</h2>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card reveal reveal-delay-1"><div class="why-num">01</div><h4>Multi-Brand Knowledge</h4><p>Experience across major motorcycle manufacturers.</p></div>
+      <div class="why-card reveal reveal-delay-2"><div class="why-num">02</div><h4>Honest Diagnosis</h4><p>Find the actual problem instead of replacing parts unnecessarily.</p></div>
+      <div class="why-card reveal reveal-delay-3"><div class="why-num">03</div><h4>Performance Minded</h4><p>Care for motorcycles ranging from commuters to performance machines.</p></div>
+      <div class="why-card reveal reveal-delay-4"><div class="why-num">04</div><h4>Attention To Detail</h4><p>Every bike gets a proper inspection and service.</p></div>
+      <div class="why-card reveal reveal-delay-5"><div class="why-num">05</div><h4>Clear Communication</h4><p>Know what your bike needs before work begins.</p></div>
+      <div class="why-card reveal reveal-delay-6"><div class="why-num">06</div><h4>Built For Riders</h4><p>A workshop created by people who understand motorcycles.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA BAND ============ -->
+<section class="cta-band">
+  <div class="cta-bg"></div>
+  <div class="speedlines" id="speedlines"></div>
+  <div class="wrap inner reveal">
+    <h2>Your bike is ready.<br>Are you?</h2>
+    <p>Book your next service or bring your motorcycle in for a professional inspection.</p>
+    <div class="cta-actions">
+      <a href="#bookingForm" class="btn btn-primary">Book A Service</a>
+      <a href="tel:+917505591638" class="btn btn-outline">Call Now</a>
+      <a href="https://wa.me/917505591638" target="_blank" rel="noopener" class="btn btn-outline">WhatsApp Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section-pad" id="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Visit The Garage</div>
+      <h2>Come visit the garage.</h2>
+    </div>
+
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="info-list">
+          <div class="info-row">
+            <svg class="ic" viewBox="0 0 24 24"><path class="icon" d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle class="icon" cx="12" cy="10" r="2.5"/></svg>
+            <div><div class="label">Workshop Address</div><div class="val">Khatima-Tanakpur Road, Near ITI College, Khatima, Uttarakhand</div></div>
+          </div>
+          <div class="info-row">
+            <svg class="ic" viewBox="0 0 24 24"><path class="icon" d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L8 9.9a16 16 0 0 0 6 6l1.4-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.8 2z"/></svg>
+            <div><div class="label">Phone Number</div><div class="val"><a href="tel:+917505591638">+91 75055 91638</a></div></div>
+          </div>
+          <div class="info-row">
+            <svg class="ic" viewBox="0 0 24 24"><path class="icon" d="M7 17l-1.4 3 3.1-1.3A8 8 0 1 0 6 15z"/></svg>
+            <div><div class="label">WhatsApp</div><div class="val"><a href="https://wa.me/917505591638" target="_blank" rel="noopener">+91 75055 91638</a></div></div>
+          </div>
+          <div class="info-row">
+            <svg class="ic" viewBox="0 0 24 24"><circle class="icon" cx="12" cy="12" r="9"/><path class="icon" d="M12 7v5l3.5 2"/></svg>
+            <div><div class="label">Opening Hours</div><div class="val">10 AM – 9 PM, closed on Wednesday</div></div>
+          </div>
+          <div class="info-row">
+            <svg class="ic" viewBox="0 0 24 24"><rect class="icon" x="3" y="5" width="18" height="14" rx="2"/><path class="icon" d="M3 7l9 6 9-6"/></svg>
+            <div><div class="label">Email</div><div class="val"><a href="mailto:anasalias2563@gmail.com">anasalias2563@gmail.com</a></div></div>
+          </div>
+        </div>
+
+        <!-- GOOGLE MAPS EMBED — pulled from the garage's real Google Maps listing.
+             To change the pinned location later: open it in Google Maps, click
+             Share > Embed a map, copy the src URL, and swap it in below. -->
+        <div class="map-box" id="map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3491.4835041608853!2d79.99177928737767!3d28.943380313378693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39a051006ecb3fc1%3A0x6145f3908add1cb9!2sApache%20Bro!5e0!3m2!1sen!2sin!4v1788100696322!5m2!1sen!2sin"
+            width="100%" height="100%" style="border:0; filter:grayscale(1) invert(92%) contrast(90%);"
+            allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Apache Bro Bike Service Centre location"></iframe>
+        </div>
+      </div>
+
+      <form class="form-panel reveal" id="bookingForm">
+        <div class="form-row">
+          <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" type="text" required placeholder="Your name"></div>
+          <div class="field"><label for="f-phone">Phone Number</label><input id="f-phone" name="phone" type="tel" required placeholder="10-digit number"></div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="f-brand">Bike Brand</label>
+            <select id="f-brand" name="brand">
+              <option>Royal Enfield</option><option>KTM</option><option>Bajaj</option>
+              <option>Yamaha</option><option>Kawasaki</option><option>Suzuki</option><option>Honda</option><option>Other</option>
+            </select>
+          </div>
+          <div class="field"><label for="f-model">Bike Model</label><input id="f-model" name="model" type="text" placeholder="e.g. Duke 390"></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="f-service">Service Required</label><input id="f-service" name="service" type="text" placeholder="e.g. General service"></div>
+          <div class="field"><label for="f-date">Preferred Date</label><input id="f-date" name="date" type="date"></div>
+        </div>
+        <div class="field"><label for="f-msg">Message</label><textarea id="f-msg" name="message" placeholder="Tell us what's going on with your bike"></textarea></div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Send Via WhatsApp</button>
+        <p class="form-note" id="formNote">Tapping the button opens WhatsApp with your details filled in — just hit Send there to reach the garage.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="brandmark"><span class="dot"></span><span>Apache Bro<small>Bike Service Centre</small></span></a>
+        <p class="foot-tag">From daily commuters to high-spec sports bikes.</p>
+        <div class="social-row" style="margin-top:22px;">
+          <a href="https://www.instagram.com/apache_bro03" target="_blank" rel="noopener" aria-label="Instagram"><svg class="icon" viewBox="0 0 24 24" width="16" height="16"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></a>
+          <a href="https://www.facebook.com/people/Apache-Bro/100037328986314/" target="_blank" rel="noopener" aria-label="Facebook"><svg class="icon" viewBox="0 0 24 24" width="16" height="16"><path d="M14 9h3V5h-3c-2.2 0-4 1.8-4 4v2H7v4h3v6h4v-6h3l1-4h-4V9c0-.6.4-1 1-1z"/></svg></a>
+          <a href="https://www.youtube.com/@ApacheBro" target="_blank" rel="noopener" aria-label="YouTube"><svg class="icon" viewBox="0 0 24 24" width="16" height="16"><rect x="3" y="6" width="18" height="12" rx="3"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Navigate</h5>
+        <div class="foot-links">
+          <a href="#top">Home</a><a href="#about">About</a><a href="#brands">Brands</a>
+          <a href="#services">Services</a><a href="#customization">Mods & Wraps</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5>Garage</h5>
+        <div class="foot-links">
+          <a href="#bookingForm">Book A Service</a><a href="tel:+917505591638">Call The Garage</a>
+          <a href="https://wa.me/917505591638" target="_blank" rel="noopener">WhatsApp</a><a href="#">Google Reviews</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> Apache Bro Bike Service Centre. All rights reserved.</span>
+      <span>Multi-brand motorcycle specialists — not an authorized manufacturer service centre.</span>
+      <span>Designed by NEXORA LABS ™.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ MOBILE STICKY BAR ============ -->
+<div class="mobile-bar">
+  <a href="tel:+917505591638"><svg class="icon" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L8 9.9a16 16 0 0 0 6 6l1.4-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.8 2z"/></svg>Call</a>
+  <a href="https://wa.me/917505591638" target="_blank" rel="noopener"><svg class="icon" viewBox="0 0 24 24"><path d="M7 17l-1.4 3 3.1-1.3A8 8 0 1 0 6 15z"/></svg>WhatsApp</a>
+  <a href="#contact"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2"/></svg>Directions</a>
+  <a href="#bookingForm"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>Book</a>
+</div>
+
+<!-- ============ RPM GAUGE (signature interactive element) ============ -->
+<div class="rpm-gauge" id="rpmGauge" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="44" fill="rgba(24,27,31,.85)" stroke="#33393f" stroke-width="1.5"/>
+    <g id="rpmTicks"></g>
+    <line id="rpmNeedle" x1="50" y1="50" x2="50" y2="16" stroke="#ff6a1a" stroke-width="2.4" stroke-linecap="round" style="transform-origin:50px 50px; transform:rotate(-120deg); transition:transform .18s ease-out;"/>
+    <circle cx="50" cy="50" r="4" fill="#ff6a1a"/>
+  </svg>
+  <div class="rpm-readout"><b id="rpmPct">0%</b>SCROLL</div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* Runs each feature in isolation — one broken feature (e.g. an
+     unsupported API in an old browser) can never take the rest of
+     the page down with it. */
+  function safe(fn){
+    try{ fn(); }
+    catch(err){ if(window.console) console.warn('[apache-bro]', err); }
+  }
+
+  var reduceMotion = false;
+  safe(function(){
+    reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  });
+
+  var hasIO = 'IntersectionObserver' in window;
+
+  safe(function(){
+    var y = document.getElementById('year');
+    if(y) y.textContent = new Date().getFullYear();
+  });
+
+  /* Mobile / tablet hamburger menu */
+  safe(function(){
+    var burger = document.getElementById('navBurger');
+    var menu = document.getElementById('mobileMenu');
+    if(!burger || !menu) return;
+    var lastFocused = null;
+
+    function openMenu(){
+      menu.classList.add('open');
+      burger.setAttribute('aria-expanded','true');
+      burger.setAttribute('aria-label','Close menu');
+      document.body.style.overflow = 'hidden';
+      lastFocused = document.activeElement;
+    }
+    function closeMenu(){
+      menu.classList.remove('open');
+      burger.setAttribute('aria-expanded','false');
+      burger.setAttribute('aria-label','Open menu');
+      document.body.style.overflow = '';
+      if(lastFocused && lastFocused.focus) lastFocused.focus();
+    }
+    burger.addEventListener('click', function(){
+      if(menu.classList.contains('open')) closeMenu(); else openMenu();
+    });
+    menu.addEventListener('click', function(ev){
+      if(ev.target === menu) closeMenu(); /* backdrop click */
+    });
+    menu.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click', closeMenu);
+    });
+    document.addEventListener('keydown', function(ev){
+      if(ev.key === 'Escape' && menu.classList.contains('open')) closeMenu();
+    });
+    window.addEventListener('resize', function(){
+      if(window.innerWidth > 1000 && menu.classList.contains('open')) closeMenu();
+    });
+  });
+
+  /* NAV solid on scroll — rAF-throttled so it never fires more than once per frame */
+  safe(function(){
+    var nav = document.getElementById('nav');
+    if(!nav) return;
+    var ticking = false;
+    function apply(){ nav.classList.toggle('solid', window.scrollY > 40); ticking = false; }
+    function onScroll(){ if(!ticking){ requestAnimationFrame(apply); ticking = true; } }
+    apply();
+    window.addEventListener('scroll', onScroll, { passive:true });
+  });
+
+  /* HERO slide crossfade — pauses when the tab isn't visible (saves battery/CPU) */
+  safe(function(){
+    var slides = document.querySelectorAll('.hero-slide');
+    if(reduceMotion || slides.length < 2) return;
+    var idx = 0, timer = null;
+    function tick(){
+      slides[idx].classList.remove('active');
+      idx = (idx + 1) % slides.length;
+      slides[idx].classList.add('active');
+    }
+    function start(){ if(!timer) timer = setInterval(tick, 4600); }
+    function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+    start();
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden) stop(); else start();
+    });
+  });
+
+  /* Scroll reveal — progressive enhancement only. Content is visible by
+     default in CSS; this just hides-then-reveals it when both
+     IntersectionObserver is supported AND motion isn't reduced. If the
+     script fails anywhere else, or IO isn't supported, the page is
+     already fully visible and needs no rescue. */
+  safe(function(){
+    var revealEls = document.querySelectorAll('.reveal, .achv-card');
+    if(!hasIO || reduceMotion || !revealEls.length) return;
+    revealEls.forEach(function(el){ el.classList.add('js-hidden'); });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); e.target.classList.remove('js-hidden'); io.unobserve(e.target); }
+      });
+    }, { threshold:.18 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  });
+
+  /* Timeline progress bars (decorative — content itself is always visible) */
+  safe(function(){
+    var steps = document.querySelectorAll('.t-step');
+    if(!hasIO || !steps.length){ steps.forEach(function(el){ el.classList.add('in'); }); return; }
+    steps.forEach(function(el, i){
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){ setTimeout(function(){ el.classList.add('in'); }, i*110); obs.unobserve(el); }
+        });
+      }, { threshold:.4 });
+      obs.observe(el);
+    });
+  });
+
+  /* Brand selector */
+  safe(function(){
+    var tabs = document.querySelectorAll('.brand-tab');
+    var panels = document.querySelectorAll('.brand-panel');
+    if(!tabs.length || !panels.length) return;
+    tabs.forEach(function(tab){
+      tab.addEventListener('click', function(){
+        tabs.forEach(function(t){ t.classList.remove('active'); t.setAttribute('aria-selected','false'); t.setAttribute('tabindex','-1'); });
+        panels.forEach(function(p){ p.classList.remove('active'); });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected','true');
+        tab.setAttribute('tabindex','0');
+        var panel = document.querySelector('.brand-panel[data-panel="'+tab.dataset.brand+'"]');
+        if(panel) panel.classList.add('active');
+      });
+    });
+  });
+
+  /* Services data + render */
+  safe(function(){
+    var grid = document.getElementById('serviceGrid');
+    if(!grid) return;
+    var services = [
+      ["General Service","Full multi-point check and tune-up for daily reliability."],
+      ["Engine Diagnostics","Pinpointing performance and running issues at the source."],
+      ["Oil & Filter Change","Right-grade oil for your engine, changed on schedule."],
+      ["Brake Service","Pad, fluid and disc inspection for confident stopping power."],
+      ["Chain Cleaning & Adjustment","Cleaned, lubed and tensioned to spec."],
+      ["Clutch Service","Smooth engagement, properly adjusted or rebuilt."],
+      ["Suspension Check","Fork and shock inspection for ride quality and control."],
+      ["Electrical Diagnostics","Tracing faults across wiring, switches and ECU signals."],
+      ["Battery Service","Testing, charging and replacement when it's really needed."],
+      ["Tyre & Wheel Service","Balancing, alignment and wear inspection."],
+      ["Engine Troubleshooting","Deep-dive fault-finding on persistent issues."],
+      ["Performance Bike Inspection","Pre-ride and pre-track checks for high-output machines."],
+      ["Pre-Ride Inspection","Quick safety check before a long trip."],
+      ["Preventive Maintenance","Catching wear before it becomes a breakdown."],
+      ["Complete Bike Inspection","Full top-to-bottom assessment with a written report."]
+    ];
+    var icons = [
+      '<circle class="icon" cx="12" cy="12" r="8"/><path class="icon" d="M12 8v4l3 2"/>',
+      '<path class="icon" d="M4 12h4l2-6 4 12 2-6h4"/>',
+      '<path class="icon" d="M8 3h8l-1 4H9L8 3z"/><path class="icon" d="M7 7h10l-1 5a6 6 0 0 1-8 0L7 7z"/>',
+      '<circle class="icon" cx="12" cy="12" r="8"/><circle class="icon" cx="12" cy="12" r="3"/>',
+      '<circle class="icon" cx="6" cy="12" r="3"/><circle class="icon" cx="18" cy="12" r="3"/><path class="icon" d="M9 12h6"/>',
+      '<path class="icon" d="M6 4l6 6-6 6M12 4l6 6-6 6"/>',
+      '<path class="icon" d="M8 20V10l4-6 4 6v10"/>',
+      '<path class="icon" d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/>',
+      '<rect class="icon" x="5" y="8" width="14" height="10" rx="1"/><path class="icon" d="M9 8V6h6v2"/>',
+      '<circle class="icon" cx="12" cy="12" r="7"/><path class="icon" d="M12 5v14M5 12h14"/>',
+      '<path class="icon" d="M4 12h5l2 7 3-14 2 7h4"/>',
+      '<path class="icon" d="M4 20l8-16 8 16H4z"/>',
+      '<path class="icon" d="M12 4v4M12 4l-3 3M12 4l3 3"/><path class="icon" d="M5 20h14"/>',
+      '<path class="icon" d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/>',
+      '<rect class="icon" x="4" y="4" width="16" height="16" rx="2"/><path class="icon" d="M4 9h16M9 4v16"/>'
+    ];
+    var frag = document.createDocumentFragment();
+    services.forEach(function(s, i){
+      var card = document.createElement('div');
+      card.className = 'service-card';
+      card.innerHTML =
+        '<div class="s-tag">'+String(i+1).padStart(2,'0')+'</div>'+
+        '<svg class="s-icon icon" viewBox="0 0 24 24">'+icons[i % icons.length]+'</svg>'+
+        '<h4>'+s[0]+'</h4><p>'+s[1]+'</p>';
+      frag.appendChild(card);
+    });
+    grid.appendChild(frag);
+  });
+
+  /* Achievement cards stagger */
+  safe(function(){
+    var cards = document.querySelectorAll('#achvRow .achv-card');
+    if(!hasIO || !cards.length){ cards.forEach(function(el){ el.classList.add('in'); }); return; }
+    cards.forEach(function(el, i){
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){ setTimeout(function(){ el.classList.add('in'); }, i*90); obs.unobserve(el); }
+        });
+      }, { threshold:.3 });
+      obs.observe(el);
+    });
+  });
+
+  /* Review carousel */
+  safe(function(){
+    var track = document.getElementById('reviewTrack');
+    var prevBtn = document.getElementById('revPrev');
+    var nextBtn = document.getElementById('revNext');
+    if(!track || !track.children.length || !prevBtn || !nextBtn) return;
+    var cards = track.children;
+    var cur = 0;
+    function cardStep(){ return cards[0].getBoundingClientRect().width + 20; }
+    function render(){ track.style.transform = 'translateX(-'+(cur*cardStep())+'px)'; }
+    nextBtn.addEventListener('click', function(){ cur = Math.min(cur + 1, cards.length - 1); render(); });
+    prevBtn.addEventListener('click', function(){ cur = Math.max(cur - 1, 0); render(); });
+    window.addEventListener('resize', function(){ render(); });
+  });
+
+  /* Speedlines (decorative CTA background) */
+  safe(function(){
+    var sl = document.getElementById('speedlines');
+    if(!sl || reduceMotion) return;
+    var frag = document.createDocumentFragment();
+    for(var i=0;i<5;i++){
+      var d = document.createElement('div');
+      d.className = 'speedline';
+      d.style.top = (10 + i*18) + '%';
+      d.style.animationDelay = (i*0.5) + 's';
+      d.style.animationDuration = (2.6 + i*0.4) + 's';
+      frag.appendChild(d);
+    }
+    sl.appendChild(frag);
+  });
+
+  /* Booking form — builds a pre-filled WhatsApp message from the form fields
+     and opens it addressed to the garage's number. The visitor still has to
+     tap Send inside WhatsApp — a browser can't submit on their behalf without
+     WhatsApp's paid Business API, so this is the free equivalent. */
+  safe(function(){
+    var form = document.getElementById('bookingForm');
+    var note = document.getElementById('formNote');
+    var WHATSAPP_NUMBER = '917505591638'; // country code + number, no + or spaces
+    if(!form) return;
+
+    function val(id){
+      var el = document.getElementById(id);
+      return el && el.value ? el.value.trim() : '';
+    }
+
+    form.addEventListener('submit', function(ev){
+      ev.preventDefault();
+
+      var lines = [
+        'New service request from the website:',
+        '',
+        'Name: ' + (val('f-name') || '-'),
+        'Phone: ' + (val('f-phone') || '-'),
+        'Bike Brand: ' + (val('f-brand') || '-'),
+        'Bike Model: ' + (val('f-model') || '-'),
+        'Service Required: ' + (val('f-service') || '-'),
+        'Preferred Date: ' + (val('f-date') || '-'),
+        'Message: ' + (val('f-msg') || '-')
+      ];
+      var text = encodeURIComponent(lines.join('\n'));
+      var waUrl = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + text;
+      var win = window.open(waUrl, '_blank');
+
+      if(note){
+        if(win){
+          note.innerHTML = 'WhatsApp opened in a new tab with your details filled in — just hit Send there.';
+        } else {
+          /* Popup blocked — give a direct link instead of failing silently */
+          note.innerHTML = 'Your browser blocked the popup — <a href="'+waUrl+'" target="_blank" rel="noopener" style="color:var(--ember); text-decoration:underline;">tap here to open WhatsApp</a> with your details filled in.';
+        }
+      }
+    });
+  });
+
+  /* RPM gauge — signature scroll indicator */
+  safe(function(){
+    var ticksG = document.getElementById('rpmTicks');
+    var needle = document.getElementById('rpmNeedle');
+    var pctLabel = document.getElementById('rpmPct');
+    if(!ticksG || !needle || !pctLabel) return;
+
+    var totalTicks = 24;
+    var frag = document.createDocumentFragment();
+    for(var t=0;t<totalTicks;t++){
+      var angle = -120 + (240 * t/(totalTicks-1));
+      var rad = angle * Math.PI/180;
+      var x1 = 50 + 37*Math.sin(rad), y1 = 50 - 37*Math.cos(rad);
+      var x2 = 50 + 41*Math.sin(rad), y2 = 50 - 41*Math.cos(rad);
+      var line = document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('x1',x1); line.setAttribute('y1',y1);
+      line.setAttribute('x2',x2); line.setAttribute('y2',y2);
+      line.setAttribute('stroke', t % 4 === 0 ? '#aab0b8' : '#33393f');
+      line.setAttribute('stroke-width', t % 4 === 0 ? 1.4 : 1);
+      line.dataset.idx = t;
+      frag.appendChild(line);
+    }
+    ticksG.appendChild(frag);
+    var tickEls = ticksG.querySelectorAll('line');
+
+    var ticking = false;
+    function updateRPM(){
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - doc.clientHeight;
+      var pct = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+      var angle = -120 + (240 * pct);
+      needle.style.transform = 'rotate('+angle+'deg)';
+      pctLabel.textContent = Math.round(pct*100) + '%';
+      var lit = Math.round(pct * (totalTicks-1));
+      tickEls.forEach(function(el){
+        var i = +el.dataset.idx;
+        el.setAttribute('stroke', i <= lit ? '#ff6a1a' : (i % 4 === 0 ? '#aab0b8' : '#33393f'));
+      });
+      ticking = false;
+    }
+    function onScroll(){ if(!ticking){ requestAnimationFrame(updateRPM); ticking = true; } }
+    updateRPM();
+    window.addEventListener('scroll', onScroll, { passive:true });
+    window.addEventListener('resize', updateRPM);
+  });
+
+  /* Belt-and-suspenders: if anything unexpected still throws after this
+     point, make sure no element is left permanently hidden. */
+  window.addEventListener('error', function(){
+    safe(function(){
+      document.querySelectorAll('.js-hidden').forEach(function(el){
+        el.classList.add('in'); el.classList.remove('js-hidden');
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
